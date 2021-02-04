@@ -4,39 +4,46 @@ from PIL import ImageShow as Is
 import os 
 os.chdir(r'C:\Users\LTM0110User\Desktop\vs_code')
 
+
+
+# In this program several operation to an image are performed in order to learn how to modify the images
+# using OpenCV
+
+
+
 arr=np.random.randint(0,256,(100,100))
 arr[0]=np.zeros(100)
 arr[:,-1]=np.zeros(100)
 arr[-1]=np.zeros(100)
 arr[:,0]=np.zeros(100)
 img=Image.fromarray(arr)
-img.show() 
+img.show() #this showld be black all zeros
 
 withe= np.ones((20,20))*255
 x_o=  [int(arr.shape[0]/2)-int(withe.shape[0]/2),int(arr.shape[0]/2)+int(withe.shape[0]/2)]           
 y_o=  [int(arr.shape[1]/2)-int(withe.shape[1]/2),int(arr.shape[1]/2)+int(withe.shape[1]/2)]           
-
+# Withe, all 256
 arr[x_o[0]:x_o[1],y_o[0]:y_o[1]]=withe
 img=Image.fromarray(arr)
 
 #___________________________________________________________________________________________________
 
-img=Image.open(r'./cv00-master/A/res/cat.jpg')
+img=Image.open(r'./cv00-master/A/res/cat.jpg') # loading the picture of a cat
 #img=img.convert('L') # Passo da una matrice in 3D a una in 1D (Bianco e nero)
 arr=np.array(img)
 img=Image.fromarray(arr[:,:,:])
 img.show()
 #____________________________________________________________________________________________________
-import cv2
+import cv2 # Opencv
 print(cv2.__version__)
 
-img= cv2.imread(r'./cv00-master\2 - Operare sulle Immagini\res\elon.jpg', cv2.IMREAD_GRAYSCALE)
-cv2.imshow('image',img)
+img= cv2.imread(r'./cv00-master\2 - Operare sulle Immagini\res\elon.jpg', cv2.IMREAD_GRAYSCALE) # Loading picture
+cv2.imshow('image',img) #Displaying picture
  
 print(type(img))
 img2= cv2.imread(r'./cv00-master\2 - Operare sulle Immagini\res\elon.jpg')
 cv2.imshow('ROBA',img2)
-cv2.waitKey(0)
+cv2.waitKey(0) # Compulsory!
 cv2.destroyAllWindows()
 #____________________________________________________________________________________________________
 os.chdir(r'./cv00-master\2 - Operare sulle Immagini')
@@ -44,20 +51,20 @@ os.chdir(r'./cv00-master\2 - Operare sulle Immagini')
 img=cv2.imread(r'./res\elon.jpg', cv2.IMREAD_COLOR)
 print(img.shape)
 
-#Ridimensionamento
+# Resize
 img_h,img_w=550, 500
 img_resized= cv2.resize(img, (img_h, img_w))
 cv2.imshow('Redim', img_resized)
  
 
-#Ritagliamento 
+# Cropping 
 size = 200
 img_cropped= img_resized[img_h//2-size//2:img_h//2+size//2 ,\
      img_w//2-size//2:img_w//2+size//2 ]
 cv2.imshow('Cropped',img_cropped)
  
 
-#Ruotamento
+# Rotation
 angle=180
 center= (img_h//2, img_w//2)
 rot_img= cv2.getRotationMatrix2D(center, angle, 1)
